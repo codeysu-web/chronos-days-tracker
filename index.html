@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronos — Days Tracker</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="stars"></div>
+<div class="aurora aurora-1"></div>
+<div class="aurora aurora-2"></div>
+<div class="aurora aurora-3"></div>
+<div id="confetti-container"></div>
+
+<div class="container">
+
+  <header>
+    <div class="logo">Chronos</div>
+    <h1>Days Tracker</h1>
+    <p class="subtitle">Track every moment — from today to any horizon</p>
+  </header>
+
+  <!-- LIVE CLOCK -->
+  <div class="clock-bar">
+    <div class="clock-item">
+      <div class="clock-label">Date</div>
+      <div class="clock-value" id="cl-date">—</div>
+    </div>
+    <div class="clock-sep"></div>
+    <div class="clock-item">
+      <div class="clock-label">Live Time</div>
+      <div class="clock-value time" id="cl-time">—</div>
+    </div>
+    <div class="clock-sep"></div>
+    <div class="clock-item">
+      <div class="clock-label">Day of Year</div>
+      <div class="clock-value" id="cl-doy">—</div>
+    </div>
+    <div class="clock-sep"></div>
+    <div class="clock-item">
+      <div class="clock-label">Week No.</div>
+      <div class="clock-value" id="cl-week">—</div>
+    </div>
+    <div class="clock-sep"></div>
+    <div class="clock-item">
+      <div class="clock-label">Year Progress</div>
+      <div class="clock-value" id="cl-yearpct">—</div>
+    </div>
+  </div>
+
+  <!-- ADD TRACKER -->
+  <div class="add-section">
+    <h2>➕ Add New Tracker</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Event Name</label>
+        <input type="text" id="inp-name" placeholder="e.g. Semester Exam" maxlength="40">
+      </div>
+      <div class="form-group">
+        <label>Start Date <span class="optional">(optional)</span></label>
+        <input type="date" id="inp-start">
+      </div>
+      <div class="form-group">
+        <label>Target Date</label>
+        <input type="date" id="inp-date">
+      </div>
+      <div class="form-group">
+        <label>Color Theme</label>
+        <select id="inp-color">
+          <option value="violet">Violet</option>
+          <option value="cyan">Cyan</option>
+          <option value="green">Green</option>
+          <option value="amber">Amber</option>
+          <option value="pink">Pink</option>
+          <option value="red">Red</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select id="inp-category">
+          <option value="personal">Personal</option>
+          <option value="academic">Academic</option>
+          <option value="work">Work</option>
+          <option value="health">Health</option>
+          <option value="travel">Travel</option>
+          <option value="event">Event</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-add" onclick="addTracker()">+ Add Tracker</button>
+      <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('upcoming', this)">Upcoming</button>
+    <button class="filter-btn" onclick="setFilter('active', this)">Active</button>
+    <button class="filter-btn" onclick="setFilter('done', this)">Done</button>
+  </div>
+
+  <div class="section-title">Your Trackers</div>
+
+  <!-- TRACKERS LIST -->
+  <div id="trackers">
+    <div id="empty">
+      <div class="empty-icon">🕐</div>
+      <p>No trackers yet — add one above to get started</p>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS PANEL -->
+  <div class="achievements-panel">
+    <div class="section-title" style="margin-bottom:16px;">🏆 Achievements</div>
+    <div id="achievements-grid" class="achievements-grid"></div>
+  </div>
+
+</div>
+
+<!-- NOTIFICATION TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
