@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head><title>Icon Generator</title></head>
+<body style="background:#111;color:white;font-family:sans-serif;padding:20px">
+
+<h3>Click buttons to download your icons</h3>
+
+<canvas id="c192" width="192" height="192" style="border-radius:24px;margin:10px"></canvas>
+<canvas id="c512" width="512" height="512" style="border-radius:24px;margin:10px"></canvas>
+
+<br><br>
+<button onclick="download('c192','icon-192.png')"
+  style="padding:10px 20px;margin:8px;background:#7c6dfa;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px">
+  Download icon-192.png
+</button>
+<button onclick="download('c512','icon-512.png')"
+  style="padding:10px 20px;margin:8px;background:#7c6dfa;color:white;border:none;border-radius:8px;cursor:pointer;font-size:14px">
+  Download icon-512.png
+</button>
+
+<script>
+function drawIcon(canvasId, size) {
+  var canvas = document.getElementById(canvasId);
+  var ctx    = canvas.getContext('2d');
+  var r      = size * 0.18; // corner radius
+
+  // Background — dark purple rounded rect
+  ctx.beginPath();
+  ctx.moveTo(r, 0);
+  ctx.lineTo(size - r, 0);
+  ctx.quadraticCurveTo(size, 0, size, r);
+  ctx.lineTo(size, size - r);
+  ctx.quadraticCurveTo(size, size, size - r, size);
+  ctx.lineTo(r, size);
+  ctx.quadraticCurveTo(0, size, 0, size - r);
+  ctx.lineTo(0, r);
+  ctx.quadraticCurveTo(0, 0, r, 0);
+  ctx.closePath();
+
+  // Gradient background
+  var grad = ctx.createLinearGradient(0, 0, size, size);
+  grad.addColorStop(0, '#0f0f1e');
+  grad.addColorStop(1, '#1a1535');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Outer glow ring
+  ctx.beginPath();
+  ctx.arc(size/2, size/2, size * 0.38, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(124,109,250,0.3)';
+  ctx.lineWidth = size * 0.025;
+  ctx.stroke();
+
+  // Inner circle
+  var innerGrad = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size*0.3);
+  innerGrad.addColorStop(0, '#a78bfa');
+  innerGrad.addColorStop(1, '#7c6dfa');
+  ctx.beginPath();
+  ctx.arc(size/2, size/2, size * 0.28, 0, Math.PI * 2);
+  ctx.fillStyle = innerGrad;
+  ctx.fill();
+
+  // Letter C
+  ctx.font = 'bold ' + Math.floor(size * 0.32) + 'px Arial';
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('C', size/2 + size*0.02, size/2 + size*0.02);
+
+  // Small dots — decorative stars
+  var dotPositions = [
+    [0.15, 0.15], [0.85, 0.15],
+    [0.15, 0.85], [0.85, 0.85],
+    [0.5,  0.08], [0.08, 0.5],
+    [0.92, 0.5],  [0.5,  0.92]
+  ];
+  for (var i = 0; i < dotPositions.length; i++) {
+    ctx.beginPath();
+    ctx.arc(
+      dotPositions[i][0] * size,
+      dotPositions[i][1] * size,
+      size * 0.018, 0, Math.PI * 2
+    );
+    ctx.fillStyle = 'rgba(167,139,250,0.5)';
+    ctx.fill();
+  }
+}
+
+function download(canvasId, filename) {
+  var canvas = document.getElementById(canvasId);
+  var a      = document.createElement('a');
+  a.download = filename;
+  a.href     = canvas.toDataURL('image/png');
+  a.click();
+}
+
+// Draw both
+drawIcon('c192', 192);
+drawIcon('c512', 512);
+</script>
+</body>
+</html>

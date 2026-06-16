@@ -363,3 +363,53 @@ h1 {
 .badge-done     { background: rgba(52,211,153,0.12);  color: var(--green); border-color: rgba(52,211,153,0.2);  }
 .badge-milestone{ background: rgba(248,113,113,0.12); color: var(--red);   border-color: rgba(248,113,113,0.2); }
 .badge-upcoming { background: rgba(124,109,250,0.15); color: var(--accent2); border-color: rgba(124,109,250,0.2); }
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+.event-ach-section {
+  margin-top: 14px;
+  border-top: 0.5px solid var(--border);
+  padding-top: 12px;
+}
+.event-ach-title {
+  font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+}
+.event-ach-row   { display: flex; flex-wrap: wrap; gap: 8px; }
+.event-ach-badge {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 3px; padding: 8px 10px; border-radius: 10px;
+  border: 0.5px solid var(--border2); background: var(--surface2);
+  min-width: 72px; text-align: center; transition: transform 0.2s;
+}
+.event-ach-badge:hover  { transform: translateY(-2px); }
+.event-ach-badge.unlocked {
+  border-color: rgba(167,139,250,0.4);
+  background: rgba(124,109,250,0.08);
+}
+.event-ach-badge.locked { opacity: 0.3; filter: grayscale(0.6); }
+.eab-icon { font-size: 20px; }
+.eab-name { font-size: 9px; font-weight: 600; color: var(--muted); line-height: 1.3; }
+.event-ach-badge.unlocked .eab-name { color: var(--accent2); }
+.achievement-card {
+  background: var(--surface2); border-radius: 12px;
+  padding: 16px 14px; text-align: center;
+  border: 0.5px solid var(--border);
+  transition: transform 0.2s; position: relative; overflow: hidden;
+}
+.achievement-card:hover   { transform: translateY(-3px); }
+.achievement-card.unlocked { border-color: rgba(167,139,250,0.4); }
+.achievement-card.locked   { opacity: 0.4; filter: grayscale(0.5); }
+.ach-icon            { font-size: 28px; margin-bottom: 8px; }
+.ach-name            { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.ach-desc            { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.ach-unlocked-label  { font-size: 10px; color: var(--green); margin-top: 6px; font-weight: 600; }
+.badge-complete  { background:rgba(251,191,36,0.15);  color:var(--amber);   border-color:rgba(251,191,36,0.25); }
+.badge-three-q   { background:rgba(52,211,153,0.12);  color:var(--green);   border-color:rgba(52,211,153,0.2);  }
+.badge-half      { background:rgba(167,139,250,0.15); color:var(--accent2); border-color:rgba(167,139,250,0.25);}
+.badge-quarter   { background:rgba(34,211,238,0.12);  color:var(--cyan);    border-color:rgba(34,211,238,0.2);  }
+.badge-today     { background:rgba(251,191,36,0.15);  color:var(--amber);   border-color:rgba(251,191,36,0.25); }
+.badge-done      { background:rgba(52,211,153,0.12);  color:var(--green);   border-color:rgba(52,211,153,0.2);  }
+.badge-milestone { background:rgba(248,113,113,0.12); color:var(--red);     border-color:rgba(248,113,113,0.2); }
+.badge-upcoming  { background:rgba(124,109,250,0.15); color:var(--accent2); border-color:rgba(124,109,250,0.2); }

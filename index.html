@@ -1,11 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chronos — Days Tracker</title>
-<link rel="stylesheet" href="style.css">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Theme color -->
+<meta name="theme-color" content="#070710">
+
+<!-- PWA capable -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Chronos">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+
+<!-- Home screen icon on Android -->
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+
+<!-- Windows tile -->
+<meta name="msapplication-TileColor" content="#070710">
+<meta name="msapplication-TileImage" content="icon-192.png">
+
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Register Service Worker -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('./sw.js')
+        .then(function(reg) {
+          window._swReg = reg;
+          console.log('SW registered:', reg.scope);
+        })
+        .catch(function(err) {
+          console.log('SW failed:', err);
+        });
+    });
+  }
+</script>
+
 </head>
 <body>
 
@@ -14,6 +54,7 @@
 <div class="aurora aurora-2"></div>
 <div class="aurora aurora-3"></div>
 <div id="confetti-container"></div>
+<div id="alert-banner-container"></div>
 
 <div class="container">
 
@@ -60,7 +101,7 @@
         <input type="text" id="inp-name" placeholder="e.g. Semester Exam" maxlength="40">
       </div>
       <div class="form-group">
-        <label>Start Date <span class="optional">(optional)</span></label>
+        <label>Start Date <span class="optional">(for progress bar)</span></label>
         <input type="date" id="inp-start">
       </div>
       <div class="form-group">
@@ -93,6 +134,7 @@
     <div class="form-actions">
       <button class="btn-add" onclick="addTracker()">+ Add Tracker</button>
       <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
+      <button class="btn-export" onclick="testNotification()" style="margin-left:4px">🔔 Test Notif</button>
     </div>
   </div>
 
@@ -106,23 +148,21 @@
 
   <div class="section-title">Your Trackers</div>
 
-  <!-- TRACKERS LIST -->
   <div id="trackers">
     <div id="empty">
       <div class="empty-icon">🕐</div>
-      <p>No trackers yet — add one above to get started</p>
+      <p>No trackers yet — add one above</p>
     </div>
   </div>
 
-  <!-- ACHIEVEMENTS PANEL -->
+  <!-- GLOBAL ACHIEVEMENTS -->
   <div class="achievements-panel">
-    <div class="section-title" style="margin-bottom:16px;">🏆 Achievements</div>
+    <div class="section-title" style="margin-bottom:16px">🏆 Global Achievements</div>
     <div id="achievements-grid" class="achievements-grid"></div>
   </div>
 
 </div>
 
-<!-- NOTIFICATION TOAST -->
 <div id="toast" class="toast"></div>
 
 <script src="script.js"></script>
